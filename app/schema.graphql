@@ -6,6 +6,12 @@ type Query{
 
 type Mutation{
 	createAuthor(data:createAuthorInput!):Author!
+	login(email:String!,password:String):Auth!
+}
+
+type Auth {
+	token:String!
+	message:String!
 }
 
 type Author{
