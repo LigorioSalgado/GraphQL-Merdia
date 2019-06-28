@@ -12,6 +12,7 @@ type Author{
 	_id:ID
 	first_name:String!
 	last_name:String!
+	password:String!
 	email:String!
 	birth_date:String!
 	gender:GENDERS
@@ -40,6 +41,7 @@ input createAuthorInput {
 	first_name:String!
 	last_name:String!
 	email:String!
+	password:String!
 	birth_date:String
 	gender:GENDERS
 	profile_picture:String
