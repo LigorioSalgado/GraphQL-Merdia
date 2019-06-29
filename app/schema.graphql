@@ -1,7 +1,9 @@
 
+directive @auth on FIELD_DEFINITION | FIELD
+
 #Este es un comentario
 type Query{
-	listAuthors:[Author]!
+	listAuthors:[Author]! @auth
 }
 
 type Mutation{
@@ -18,7 +20,7 @@ type Author{
 	_id:ID
 	first_name:String!
 	last_name:String!
-	password:String!
+	password:String
 	email:String!
 	birth_date:String!
 	gender:GENDERS
