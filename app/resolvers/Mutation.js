@@ -45,12 +45,11 @@ const deleteProfile =  async(root,params,context,info) => {
 const createPost = async(root,params,context,info) =>{
 
 	const {user} = context;
-	params.data.author = user._id
+	params.data.author = user
 	const post = await PostModel.create(params.data)
 								.catch( e => {throw new Error("Error al crear post")} )
-	const newPost = PostModel.findById(post._id).populate('author');
-	await AuthorModel.findOneAndUpdate({_id:user._id},{$push:{posts:post._id}})
-						
+	const newPost = await PostModel.findOne({_id:post._id}).populate('author');
+	await AuthorModel.findByIdAndUpdate(user.id,{$push:{posts:post}})
 	return newPost;
 }
 

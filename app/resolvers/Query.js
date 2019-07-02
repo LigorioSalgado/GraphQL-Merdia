@@ -2,13 +2,14 @@ const AuthorModel =  require('../models/Author');
 const PostModel =  require('../models/Post');
 
 const listAuthors =  async(root,params,context,info) => {
-	const authors = await AuthorModel.find({});
+	const authors = await AuthorModel.find({is_active:true}).populate('posts');
+	console.log(authors);
 	return authors
 }
 
 const singleAuthor  =  async(root,params,context,info) => {
 
-	const author =  await AuthorModel.findById(params.id);
+	const author =  await AuthorModel.findById(params.id).posts('posts');
 	if (!author) throw new Error("Author no existe");
 
 	return author.toObject();
@@ -16,7 +17,7 @@ const singleAuthor  =  async(root,params,context,info) => {
 
 const listPosts =  async(root, params, context, info) => {
 
-	const posts =  await PostModel.find({}).populate('author');
+	const posts =  await PostModel.find({is_active:true}).populate('author');
 	return posts
 }
 
