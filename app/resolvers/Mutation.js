@@ -25,7 +25,7 @@ const updateProfile = async(root,params,context,info) => {
 	const {user} =  context
 	let Author = await AuthorModel.findById(user._id)
 	if(!Author) throw new Error(" Autor No Existe")
-	Author = {...Author,...data}
+	Object.keys(data).map( key => Author[key] = data[key])
 	const updatedAuthor = await Author.save({new:true})
 	return updatedAuthor.toObject();
 
