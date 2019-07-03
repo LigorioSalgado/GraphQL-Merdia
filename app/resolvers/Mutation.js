@@ -1,6 +1,7 @@
 const AuthorModel =  require('../models/Author');
 const PostModel = require('../models/Post');
 const authenticate =  require('../utils/authenticate');
+const storage =  require('../utils/storage');
 
 
 const createAuthor =  async(root,params,context,info) => {
@@ -46,6 +47,13 @@ const createPost = async(root,params,context,info) =>{
 
 	const {user} = context;
 	params.data.author = user
+	if(params.data.cover_photo){
+		const { createReadStream } = await params.data.cover_photo;
+		const stream =  createReadStream();
+		const { url } =  await storage({ stream });
+
+		params.data.cover_photo =  url;
+	} 
 	const post = await PostModel.create(params.data)
 								.catch( e => {throw new Error("Error al crear post")} )
 	const newPost = await PostModel.findOne({_id:post._id}).populate('author');
