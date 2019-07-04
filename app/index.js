@@ -4,7 +4,7 @@ const { importSchema } = require('graphql-import');
 const { makeExecutableSchema } = require('graphql-tools')
 const mongoose =  require('mongoose');
 const resolvers =  require('./resolvers');
-const typeDefs = importSchema('./app/schema.graphql'); 
+const typeDefs = importSchema(__dirname + '/schema.graphql');
 const { AuthDirective } = require('./resolvers/directives');
 const verifyToken =  require('./utils/verifyToken');
 

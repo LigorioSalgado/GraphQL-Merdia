@@ -1,0 +1,17 @@
+{
+	"version":2,
+	"env":{
+		"MONGO_URI_DEV":"mongodb+srv://prueba2:prueba2@cluster0-vp6hz.mongodb.net/myBlog?retryWrites=true&w=majority"
+
+	},
+	"builds": [
+		{
+			"src":"app/index.js",
+			"use":"@now/node-server@canary"
+		}
+	],
+	"routes":[
+		{"src":"/.*","dest":"app/index.js"}
+	]
+
+}
