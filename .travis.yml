@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+- 8.10.0
+env:
+  - NODE_ENV=test
+  - MONGO_URI_TEST=mongodb+srv://prueba2:prueba2@cluster0-vp6hz.mongodb.net/myBlogTest?retryWrites=true&w=majority
+deploy:
+  provider: heroku
+  app: blogfrontend
+  on:
+    repo: LigorioSalgado/GraphQL-Merdia
+    branch: master
+  api_key:
+    secure: Iq2NqHM7kqa89ANERYTaBvqLHS6XG12dhFhLP++oY60UW3HBrvjjTjQUiBAACBwSOsrT7eFLZoT7s4BfY3KljE95ABWNjKqfyQbIl8cmy3V+kPfw/VM/TQZMWaGmH/usz7Ahn8qxfhBG3C5l8gDONdKpS+MW3+4kbYreDKeanMP/GdaIxr1ooLbwNDskMOhEZN6oCfObJ8CKqjTd8XD5MCYckC4cGoPjpuU9UhrBuMubmqjbNxBsE0UNuRJ/1uaZOljDDSgVq64Q2GSsjPBE0PgHlbiL14URod7fBg9nAN5VmxptWmlwVHQh8QSjjPdMEp+F4Rt1g6LnsrwBXlyqsv2idcDewlELzPvq2Jc8Km6Y78xafE4lLoxMxbiCGgUORYfDVyMMah1ySPCcUjYleMIB7BM2m7KvZnrP4/PpLRR8VmV7Secf8haZ639/bvevsHqfNPjqIwoFJEVZmIfx53AQocqiAZvn3DcmUZwOpyiXoHfmSkWbS1cFDNlzdC05rSUoOvuG74VAd5ZUWcbC6ahCWnCGWcyaLstYXVnqYGHVbQam8V9dyTYw8YcRdk7dhArTuBDQ+4sZijkMO4zG3AIbOK4vTvUWHJGq7DQSDeEHZuklDt9h8RY2grC421F0sm84VN5Ejx3XEbJ+DvqehBURC07E6wd/s1CL6Vk+JA8=

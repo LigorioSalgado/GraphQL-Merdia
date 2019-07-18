@@ -1,6 +1,6 @@
-const { graphql } =  require('graphql');
-const { schema } =  require('../index');
-const AuthorModel =  require('../models/Author');
+const { graphql } = require('graphql');
+const { schema } = require('../index');
+const AuthorModel = require('../models/Author');
 const setupTest = require('./helpers');
 
 
@@ -18,33 +18,39 @@ mutation addAuthor($data:createAuthorInput!){
 
 describe("Testing Create Author Mutation", () => {
 
-	beforeEach( async () => await setupTest() );
+	beforeEach(async () => await setupTest());
 
-	it("Should Create Author", async () => {
-			const  data = {
-				first_name:"prueba",
-				last_name:"prueba",
-				email:"prueba@prueba.com",
-				password:"prueba"
+	it("Should Create Author", () => {
+		const makeTest = async() => {
+			const data = {
+				first_name: "prueba",
+				last_name: "prueba",
+				email: "prueba@prueba.com",
+				password: "prueba"
 			}
-			const res = await graphql(schema,MUTATION_ADD_AUTHOR,null,{},{data})
-
+			const res = await graphql(schema, MUTATION_ADD_AUTHOR, null, {}, { data })
+	
 			expect(res.data.createAuthor).toHaveProperty("_id")
-
-	})
-
-	it("Should not create Author", async () => {
-		const  data = {
-			first_name:"prueba",
-			last_name:"prueba",
-			email:"prueba@prueba.com",
-			password:"prueba"
 		}
-		await AuthorModel.create(data);
-		const res = await graphql(schema,MUTATION_ADD_AUTHOR,null,{},{data})
-		expect(res).toHaveProperty("errors");
+		makeTest();
+
 	})
- 
+
+	it("Should not create Author", () => {
+		const makeTest = async() => {
+			const data = {
+				first_name: "prueba",
+				last_name: "prueba",
+				email: "prueba@prueba.com",
+				password: "prueba"
+			}
+			await AuthorModel.create(data);
+			const res = await graphql(schema, MUTATION_ADD_AUTHOR, null, {}, { data })
+			expect(res).toHaveProperty("errors");
+		}
+		makeTest();
+	})
+
 
 })
 
@@ -63,50 +69,56 @@ mutation addPost($data:createPostAuthor!){
 
 `
 
-describe("Testing Create Post Mutation", async() => {
+describe("Testing Create Post Mutation", async () => {
 
-	beforeEach( async () => await setupTest() );
-
-
-	it("Should Create Post", async () => {
-		const  author = {
-			first_name:"prueba",
-			last_name:"prueba",
-			email:"prueba@prueba.com",
-			password:"prueba"
-		}
-		const data = {
-			title : "Post Prueba",
-			content: "Este es un post de prueba"
-		}
-
-		const user  = await AuthorModel.create(author)
-		const res = await graphql(schema,MUTATION_ADD_POST,null,{user},{data})
-
-		expect(res.data.createPost).toHaveProperty("_id")
-		expect(res.data.createPost.author).toHaveProperty("_id")
+	beforeEach(async () => await setupTest());
 
 
-})
-
-it("Should Not Create Post", async () => {
-	const  author = {
-		first_name:"prueba",
-		last_name:"prueba",
-		email:"prueba@prueba.com",
-		password:"prueba"
-	}
-	const data = {
-		content: "Este es un post de prueba"
-	}
-
-	const user  = await AuthorModel.create(author)
-	const res = await graphql(schema,MUTATION_ADD_POST,null,{user},{data})
-
-	expect(res).toHaveProperty("errors")
+	it("Should Create Post", () => {
+		const makeTest = async() => {
+			const author = {
+				first_name: "prueba",
+				last_name: "prueba",
+				email: "prueba@prueba.com",
+				password: "prueba"
+			}
+			const data = {
+				title: "Post Prueba",
+				content: "Este es un post de prueba"
+			}
 	
+			const user = await AuthorModel.create(author)
+			const res = await graphql(schema, MUTATION_ADD_POST, null, { user }, { data })
+	
+			expect(res.data.createPost).toHaveProperty("_id")
+			expect(res.data.createPost.author).toHaveProperty("_id")
+		}
+		makeTest();
 
-})
+	})
+
+	it("Should Not Create Post", () => {
+		
+		const makeTest = async() => {
+			const author = {
+				first_name: "prueba",
+				last_name: "prueba",
+				email: "prueba@prueba.com",
+				password: "prueba"
+			}
+			const data = {
+				content: "Este es un post de prueba"
+			}
+	
+			const user = await AuthorModel.create(author)
+			const res = await graphql(schema, MUTATION_ADD_POST, null, { user }, { data })
+	
+			expect(res).toHaveProperty("errors")
+		}
+
+		makeTest();
+
+	})
 
 
 
