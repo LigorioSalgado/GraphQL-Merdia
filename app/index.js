@@ -9,10 +9,9 @@ const { AuthDirective } = require('./resolvers/directives');
 const verifyToken =  require('./utils/verifyToken');
 
 
-const MONGO_URI =  process.env.NODE_ENV == 'test' ? process.env.MONGO_URI_TEST 
-												: process.env.MONGO_URI_DEV 
+const MONGO_URI = process.env.MONGO_URI;
 
-mongoose.connect('mongodb+srv://prueba2:prueba2@cluster0-vp6hz.mongodb.net/myBlogTest?retryWrites=true&w=majority',{ useNewUrlParser: true });
+mongoose.connect(MONGO_URI,{ useNewUrlParser: true });
 
 const mongo =  mongoose.connection;
 
