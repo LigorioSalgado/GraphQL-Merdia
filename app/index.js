@@ -11,7 +11,7 @@ const verifyToken =  require('./utils/verifyToken');
 
 const MONGO_URI = process.env.MONGO_URI;
 console.log(MONGO_URI)
-mongoose.connect(MONGO_URI,{ useNewUrlParser: true });
+mongoose.connect("mongodb+srv://prueba2:prueba2@cluster0-vp6hz.mongodb.net/myBlogTest?retryWrites=true&w=majority",{ useNewUrlParser: true });
 
 const mongo =  mongoose.connection;
 
